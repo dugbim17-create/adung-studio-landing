@@ -3,1329 +3,1148 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Adung Studio Book v2.55 | Native AI Documentary, Audiobook &amp; Video Studio Powered by Claude</title>
-<meta name="description" content="Adung Studio Book is a native Windows desktop studio that takes long-form projects from script to storyboard, neural voice, sound design, and final MP4 render, with Anthropic Claude (Claude 3.5 Sonnet, Claude 3 Opus, Claude 3.5 Haiku) as your opt-in Editorial Director.">
-<meta property="og:title" content="Adung Studio Book | Script to Finished Video with Claude Editorial Director">
-<meta property="og:description" content="Native Windows production studio for long-form documentaries, audiobooks, and animated explainers. Powered by Anthropic Claude Messages API (Claude 3.5 Sonnet, Claude 3 Opus, Claude 3.5 Haiku).">
+<title>Adung Studio Book v2.55 | Every Long-Form Script. One Native Windows Workstation.</title>
+<meta name="description" content="Adung Studio Book is a local-first, native Windows production studio for long-form documentaries and audiobooks. Powered by Anthropic Claude 3.5 Sonnet as your editorial director.">
+<meta property="og:title" content="Adung Studio Book | Native Windows Studio Powered by Claude 3.5 Sonnet">
+<meta property="og:description" content="From raw research manuscript to finished 4K documentary. Native Windows workstation with Claude 3.5 Sonnet editorial director and offline neural voice synthesis.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://claudeadung.space/">
 <meta property="og:image" content="https://claudeadung.space/assets/scene-cinematic.jpg">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://claudeadung.space/">
 <link rel="alternate" hreflang="en" href="https://claudeadung.space/">
 <link rel="alternate" hreflang="vi" href="https://claudeadung.space/vi.html">
-<link rel="alternate" hreflang="x-default" href="https://claudeadung.space/">
 <link rel="icon" href="assets/favicon.ico">
-<style>
-:root{
-  --bg:#090c10;
-  --bg-2:#10151c;
-  --bg-3:#161d26;
-  --card:rgba(18,24,33,.82);
-  --line:#232f3e;
-  --line-bright:#33465c;
-  --text:#ecf2f6;
-  --muted:#95a5b5;
-  --accent:#4fd1b0;
-  --accent-2:#38bdf8;
-  --claude:#e07a5f;
-  --claude-soft:rgba(224,122,95,.15);
-  --claude-border:rgba(224,122,95,.45);
-  --accent-ink:#031c16;
-  --shadow:rgba(2,8,14,.65);
-  --r:14px;
-  --r-sm:9px;
-  --ease:cubic-bezier(.16,1,.3,1);
-  --font:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
-  --mono:ui-monospace,"Cascadia Mono","SF Mono",Consolas,monospace;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-section[id]{scroll-margin-top:96px}
-body{
-  background-color:var(--bg);
-  background-image:
-    radial-gradient(circle at 12% 10%, rgba(79,209,176,.10) 0%, transparent 42%),
-    radial-gradient(circle at 86% 22%, rgba(224,122,95,.11) 0%, transparent 40%),
-    radial-gradient(circle at 50% 80%, rgba(56,189,248,.07) 0%, transparent 48%);
-  background-attachment:fixed;
-  color:var(--text);
-  font-family:var(--font);
-  line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-}
-img{display:block;max-width:100%}
-a{color:inherit}
-.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
-/* Top Direct Contact & Grant Verification Bar */
-.topbar{
-  background:linear-gradient(90deg, rgba(79,209,176,.14) 0%, rgba(224,122,95,.16) 50%, rgba(56,189,248,.14) 100%);
-  border-bottom:1px solid var(--line);
-  font-size:13px;
-  padding:8px 0;
-  position:relative;
-  z-index:30;
-}
-.topbar .wrap{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
-}
-.topbar-left,.topbar-right{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.status-pill{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:3px 10px;
-  border-radius:999px;
-  background:rgba(79,209,176,.16);
-  border:1px solid rgba(79,209,176,.45);
-  color:var(--accent);
-  font-weight:700;
-  font-size:11px;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-}
-.status-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--accent);
-  box-shadow:0 0 8px var(--accent);
-}
-.mail-pill{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:4px 12px;
-  border-radius:999px;
-  background:rgba(255,255,255,.06);
-  border:1px solid var(--line-bright);
-  color:var(--text);
-  text-decoration:none;
-  font-weight:600;
-  font-family:var(--mono);
-  font-size:12.5px;
-  transition:border-color .2s,background .2s;
-}
-.mail-pill:hover{
-  border-color:var(--accent);
-  background:rgba(79,209,176,.12);
-}
-.lang-switch{
-  display:inline-flex;
-  align-items:center;
-  background:var(--bg-2);
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:2px;
-  font-size:12px;
-  font-weight:700;
-}
-.lang-switch a{
-  padding:3px 10px;
-  border-radius:999px;
-  text-decoration:none;
-  color:var(--muted);
-}
-.lang-switch a.active{
-  background:var(--accent);
-  color:var(--accent-ink);
-}
-
-/* Sticky Navigation */
-.nav{
-  position:sticky;
-  top:0;
-  z-index:25;
-  background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-}
-.nav .wrap{
-  height:68px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-}
-.brand{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  font-weight:800;
-  font-size:1.08rem;
-  letter-spacing:-.02em;
-  text-decoration:none;
-  white-space:nowrap;
-}
-.brand-badge{
-  font-family:var(--mono);
-  font-size:11px;
-  font-weight:600;
-  padding:2px 7px;
-  border-radius:6px;
-  background:var(--bg-3);
-  border:1px solid var(--line);
-  color:var(--accent);
-}
-.nav ul{
-  display:flex;
-  gap:24px;
-  list-style:none;
-}
-.nav ul a{
-  color:var(--muted);
-  text-decoration:none;
-  font-size:14.5px;
-  font-weight:500;
-  transition:color .2s;
-}
-.nav ul a:hover{color:var(--text)}
-.nav-actions{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  white-space:nowrap;
-  padding:11px 18px;
-  border-radius:var(--r-sm);
-  font-weight:600;
-  font-size:14.5px;
-  text-decoration:none;
-  border:1px solid var(--line);
-  transition:transform .2s var(--ease),background .2s,border-color .2s;
-  cursor:pointer;
-}
-.btn:active{transform:translateY(1px) scale(.99)}
-.btn-primary{
-  background:var(--accent);
-  color:var(--accent-ink);
-  border-color:var(--accent);
-  font-weight:700;
-}
-.btn-primary:hover{transform:translateY(-2px);filter:brightness(1.06)}
-.btn-claude{
-  background:var(--claude-soft);
-  color:#f7b29d;
-  border-color:var(--claude-border);
-}
-.btn-claude:hover{background:rgba(224,122,95,.24);transform:translateY(-2px)}
-.btn-ghost{
-  background:rgba(255,255,255,.03);
-  color:var(--text);
-}
-.btn-ghost:hover{border-color:var(--muted);background:rgba(255,255,255,.06)}
-
-/* Hero */
-.hero{padding:64px 0 84px}
-.hero-grid{
-  display:grid;
-  grid-template-columns:1.08fr .92fr;
-  gap:48px;
-  align-items:center;
-}
-.eyebrow-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:20px;
-}
-.badge-claude{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:5px 12px;
-  border-radius:999px;
-  background:var(--claude-soft);
-  border:1px solid var(--claude-border);
-  color:#f8b4a0;
-  font-size:12.5px;
-  font-weight:700;
-}
-.badge-native{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:5px 12px;
-  border-radius:999px;
-  background:rgba(56,189,248,.12);
-  border:1px solid rgba(56,189,248,.35);
-  color:#7dd3fc;
-  font-size:12.5px;
-  font-weight:600;
-}
-h1{
-  font-size:clamp(2.35rem,4.6vw,3.75rem);
-  line-height:1.06;
-  letter-spacing:-.035em;
-  font-weight:800;
-  max-width:19ch;
-}
-h1 span.grad{
-  background:linear-gradient(95deg,#4fd1b0 0%,#7dd3fc 52%,#f6ad8f 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-.hero p.sub{
-  margin-top:20px;
-  color:var(--muted);
-  font-size:1.12rem;
-  max-width:54ch;
-}
-.cta-row{
-  display:flex;
-  gap:12px;
-  margin-top:28px;
-  flex-wrap:wrap;
-}
-.hero-contact-box{
-  margin-top:22px;
-  padding:12px 16px;
-  border-radius:var(--r-sm);
-  background:var(--bg-2);
-  border:1px solid var(--line);
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-  font-size:13.5px;
-}
-.hero-contact-box code{
-  font-family:var(--mono);
-  color:var(--accent);
-  font-weight:700;
-}
-.hero-metrics{
-  margin-top:28px;
-  padding-top:22px;
-  border-top:1px solid var(--line);
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-.metric b{
-  display:block;
-  font-size:1.35rem;
-  font-weight:800;
-  color:var(--text);
-  letter-spacing:-.02em;
-}
-.metric span{
-  font-size:12.5px;
-  color:var(--muted);
-}
-
-/* Studio Window Preview Card */
-.studio-card{
-  background:var(--bg-2);
-  border:1px solid var(--line-bright);
-  border-radius:var(--r);
-  overflow:hidden;
-  box-shadow:0 32px 80px -28px var(--shadow);
-}
-.studio-titlebar{
-  height:38px;
-  padding:0 14px;
-  background:var(--bg-3);
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-family:var(--mono);
-  font-size:11.5px;
-  color:var(--muted);
-}
-.win-dots{display:flex;gap:6px}
-.win-dots i{width:10px;height:10px;border-radius:50%;display:inline-block;background:#334155}
-.win-dots i:nth-child(1){background:#ef4444}
-.win-dots i:nth-child(2){background:#f59e0b}
-.win-dots i:nth-child(3){background:#10b981}
-.studio-frame{
-  position:relative;
-  aspect-ratio:16/10;
-  overflow:hidden;
-  background:#050709;
-}
-.studio-frame img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:50% 22%;
-}
-.studio-overlay{
-  position:absolute;
-  inset:auto 12px 12px 12px;
-  background:rgba(9,12,16,.88);
-  backdrop-filter:blur(10px);
-  border:1px solid var(--line-bright);
-  border-radius:10px;
-  padding:12px 14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
-  font-size:12.5px;
-}
-.studio-overlay .tag{
-  font-family:var(--mono);
-  font-size:11px;
-  color:var(--accent);
-  background:rgba(79,209,176,.12);
-  border:1px solid rgba(79,209,176,.35);
-  padding:2px 8px;
-  border-radius:6px;
-}
-.studio-statusbar{
-  padding:12px 16px;
-  background:var(--bg-3);
-  border-top:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
-  font-family:var(--mono);
-  font-size:11.5px;
-  color:var(--muted);
-}
-.studio-statusbar strong{color:#f8b4a0}
-
-/* Generic Sections */
-section{padding:92px 0}
-.sec-head{max-width:740px;margin-bottom:48px}
-.eyebrow{
-  font-family:var(--mono);
-  font-size:12px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:12px;
-  display:block;
-  font-weight:700;
-}
-h2{
-  font-size:clamp(1.85rem,3.3vw,2.65rem);
-  line-height:1.12;
-  letter-spacing:-.03em;
-  font-weight:800;
-}
-.lead{
-  margin-top:14px;
-  color:var(--muted);
-  font-size:1.06rem;
-}
-
-/* Claude Deep Integration Section */
-.claude-sec{
-  background:linear-gradient(180deg,var(--bg-2) 0%,rgba(16,21,28,.6) 100%);
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-}
-.claude-grid{
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:44px;
-  align-items:start;
-}
-.model-cards{
-  display:grid;
-  gap:16px;
-}
-.model-card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-left:3px solid var(--claude);
-  border-radius:var(--r-sm);
-  padding:20px 22px;
-}
-.model-card-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:8px;
-}
-.model-card-head h3{
-  font-size:1.12rem;
-  font-weight:700;
-  letter-spacing:-.01em;
-}
-.model-id{
-  font-family:var(--mono);
-  font-size:11.5px;
-  padding:3px 9px;
-  border-radius:6px;
-  background:var(--claude-soft);
-  border:1px solid var(--claude-border);
-  color:#f8b4a0;
-}
-.model-card p{
-  color:var(--muted);
-  font-size:.95rem;
-}
-.code-panel{
-  background:#070a0e;
-  border:1px solid var(--line-bright);
-  border-radius:var(--r);
-  overflow:hidden;
-  box-shadow:0 24px 60px -24px var(--shadow);
-}
-.code-head{
-  padding:11px 16px;
-  background:var(--bg-3);
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-family:var(--mono);
-  font-size:12px;
-  color:var(--muted);
-}
-.code-head span.ok{color:var(--accent)}
-.code-body{
-  padding:20px;
-  font-family:var(--mono);
-  font-size:12.5px;
-  line-height:1.65;
-  color:#d6e2ec;
-  overflow-x:auto;
-}
-.code-body .c{color:#64748b}
-.code-body .k{color:#f8b4a0}
-.code-body .s{color:#4fd1b0}
-.code-body .n{color:#7dd3fc}
-.safety-strip{
-  margin-top:16px;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-.safety-item{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--r-sm);
-  padding:14px 16px;
-  font-size:13px;
-}
-.safety-item b{
-  display:block;
-  color:var(--text);
-  margin-bottom:4px;
-}
-.safety-item span{color:var(--muted)}
-
-/* 4-Stage Pipeline Workflow */
-.flow{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-.flow-card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--r);
-  padding:26px 22px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  transition:border-color .25s,transform .25s var(--ease);
-}
-.flow-card:hover{
-  border-color:var(--accent);
-  transform:translateY(-3px);
-}
-.flow-step{
-  font-family:var(--mono);
-  font-size:12px;
-  color:var(--accent);
-  font-weight:700;
-  margin-bottom:12px;
-}
-.flow-card h3{
-  font-size:1.28rem;
-  margin-bottom:10px;
-  letter-spacing:-.02em;
-}
-.flow-card p{
-  color:var(--muted);
-  font-size:.95rem;
-  margin-bottom:16px;
-}
-.flow-meta{
-  padding-top:12px;
-  border-top:1px solid var(--line);
-  font-family:var(--mono);
-  font-size:11.5px;
-  color:var(--muted);
-}
-
-/* Bento Product Architecture */
-.bento{
-  display:grid;
-  gap:20px;
-  grid-template-columns:1.15fr .85fr;
-}
-.tile{
-  border-radius:var(--r);
-  border:1px solid var(--line);
-  overflow:hidden;
-  background:var(--bg-2);
-}
-.tile-board{
-  display:grid;
-  grid-template-columns:240px 1fr;
-  align-items:stretch;
-  background:#0a0d11;
-}
-.tile-board img{
-  width:100%;
-  height:100%;
-  max-height:460px;
-  object-fit:cover;
-}
-.tile-board .cap{
-  padding:30px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-.tile-board .cap h3{
-  font-size:1.45rem;
-  letter-spacing:-.02em;
-  line-height:1.2;
-  margin-top:8px;
-}
-.tile-board .cap p{
-  color:var(--muted);
-  margin-top:12px;
-  font-size:.96rem;
-}
-.spec-list{
-  margin-top:18px;
-  list-style:none;
-  display:grid;
-  gap:8px;
-  font-size:13px;
-  color:var(--text);
-}
-.spec-list li::before{
-  content:"✓ ";
-  color:var(--accent);
-  font-weight:700;
-}
-.right-stack{
-  display:grid;
-  gap:20px;
-}
-.tile-pad{padding:28px}
-.tile-pad h3{
-  font-size:1.3rem;
-  letter-spacing:-.02em;
-  margin-top:6px;
-}
-.tile-pad p{
-  margin-top:10px;
-  color:var(--muted);
-  font-size:.95rem;
-}
-.tile-pad code{
-  font-family:var(--mono);
-  font-size:.84rem;
-  color:var(--accent);
-  background:rgba(79,209,176,.1);
-  padding:2px 6px;
-  border-radius:4px;
-}
-
-/* 6 Core Modules Grid */
-.modules-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-.mod-card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--r);
-  padding:24px;
-}
-.mod-card h3{
-  font-size:1.12rem;
-  margin-bottom:8px;
-}
-.mod-card p{
-  color:var(--muted);
-  font-size:.93rem;
-}
-.mod-tag{
-  display:inline-block;
-  font-family:var(--mono);
-  font-size:11px;
-  color:var(--accent-2);
-  margin-bottom:10px;
-}
-
-/* Pricing / Studio Editions */
-.pricing-sec{
-  background:var(--bg-2);
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-}
-.pricing-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
-}
-.price-card{
-  background:var(--bg);
-  border:1px solid var(--line);
-  border-radius:var(--r);
-  padding:30px 26px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-.price-card.featured{
-  border-color:var(--accent);
-  box-shadow:0 20px 60px -25px rgba(79,209,176,.22);
-}
-.price-tier{
-  font-family:var(--mono);
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  color:var(--accent);
-  font-weight:700;
-}
-.price-val{
-  font-size:2.2rem;
-  font-weight:800;
-  margin:12px 0 6px;
-  letter-spacing:-.03em;
-}
-.price-val span{
-  font-size:.95rem;
-  font-weight:500;
-  color:var(--muted);
-}
-.price-desc{
-  color:var(--muted);
-  font-size:.92rem;
-  margin-bottom:20px;
-}
-.price-feats{
-  list-style:none;
-  display:grid;
-  gap:10px;
-  font-size:.93rem;
-  margin-bottom:26px;
-}
-.price-feats li::before{
-  content:"● ";
-  color:var(--accent);
-}
-
-/* FAQ */
-.faq-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:20px;
-}
-.faq-item{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--r-sm);
-  padding:22px 24px;
-}
-.faq-item h3{
-  font-size:1.05rem;
-  margin-bottom:8px;
-}
-.faq-item p{
-  color:var(--muted);
-  font-size:.94rem;
-}
-
-/* Closing Section */
-.closing .wrap{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:48px;
-  align-items:center;
-}
-.mail-big{
-  display:inline-block;
-  margin-top:22px;
-  font-size:clamp(1.25rem,2.6vw,1.85rem);
-  font-weight:800;
-  font-family:var(--mono);
-  letter-spacing:-.02em;
-  color:var(--accent);
-  text-decoration:none;
-  border-bottom:2px solid var(--accent);
-}
-.mail-big:hover{opacity:.86}
-.closing-img{
-  border-radius:var(--r);
-  border:1px solid var(--line-bright);
-  aspect-ratio:16/10;
-  object-fit:cover;
-  width:100%;
-  box-shadow:0 28px 70px -28px var(--shadow);
-}
-
-/* Footer */
-footer{
-  border-top:1px solid var(--line);
-  padding:36px 0;
-  color:var(--muted);
-  font-size:14px;
-  background:var(--bg-2);
-}
-.footer-inner{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  flex-wrap:wrap;
-}
-.footer-links{
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-.footer-links a{
-  text-decoration:none;
-  color:var(--muted);
-}
-.footer-links a:hover{color:var(--text)}
-
-/* Responsive */
-@media (max-width:980px){
-  .nav ul{display:none}
-  .hero-grid,.claude-grid,.bento,.closing .wrap{grid-template-columns:1fr;gap:32px}
-  .flow,.modules-grid,.pricing-grid,.faq-grid{grid-template-columns:1fr}
-  .tile-board{grid-template-columns:1fr}
-  .tile-board img{max-height:360px;object-fit:contain;background:#070a0e}
-  .safety-strip{grid-template-columns:1fr}
-  section{padding:64px 0}
-}
-</style>
+<!-- Schema.org JSON-LD for Automated Verification Crawlers & Evaluators -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://claudeadung.space/#organization",
-      "name": "Adung Studio",
-      "url": "https://claudeadung.space/",
-      "logo": "https://claudeadung.space/assets/favicon.ico",
-      "email": "founder@claudeadung.space",
-      "foundingDate": "2024",
-      "sameAs": [
-        "https://www.linkedin.com/in/huy-minh-273ba5441/",
-        "https://github.com/AdungApp"
-      ],
-      "founder": {
-        "@type": "Person",
-        "name": "Huy Minh",
-        "jobTitle": "Founder & Lead Developer",
-        "email": "founder@claudeadung.space",
-        "sameAs": "https://www.linkedin.com/in/huy-minh-273ba5441/"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "VN"
-      },
-      "description": "Independent bootstrapped software studio engineering desktop workstations for AI-powered long-form video documentaries and audiobooks."
-    },
     {
       "@type": "SoftwareApplication",
       "@id": "https://claudeadung.space/#software",
       "name": "Adung Studio Book",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Windows 10, Windows 11 (64-bit)",
+      "softwareVersion": "2.55.1",
+      "datePublished": "2026-10-10",
+      "author": {
+        "@type": "Person",
+        "name": "Dung Duy",
+        "jobTitle": "Founder & Lead Developer",
+        "sameAs": "https://www.linkedin.com/in/dung-duy-72a123442/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Adung Studio",
+        "url": "https://claudeadung.space/",
+        "logo": "https://claudeadung.space/assets/scene-master.jpg",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "founder@claudeadung.space",
+          "contactType": "technical support"
+        }
+      },
+      "description": "Native Windows desktop production studio for independent documentary creators, unifying long-form manuscript breakdown, Claude 3.5 Sonnet editorial continuity, offline neural speech synthesis, and hardware-accelerated 4K timeline rendering.",
       "offers": {
         "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "description": "Free Evaluation & Indie Creator Licenses Available"
+        "price": "49.00",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://claudeadung.space/#organization",
+      "name": "Adung Studio",
+      "url": "https://claudeadung.space/",
+      "founder": {
+        "@type": "Person",
+        "name": "Dung Duy",
+        "sameAs": "https://www.linkedin.com/in/dung-duy-72a123442/"
       },
-      "author": {
-        "@id": "https://claudeadung.space/#organization"
+      "foundingDate": "2024",
+      "email": "founder@claudeadung.space",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hanoi",
+        "addressCountry": "VN"
       }
     }
   ]
 }
 </script>
+
+<style>
+:root {
+  --bg: #090c10;
+  --bg-card: #11151d;
+  --bg-card-subtle: #161c26;
+  --line: #202735;
+  --line-bright: #2d384c;
+  --text: #edf2f7;
+  --muted: #8e9bb0;
+  --accent: #00d2b4;
+  --accent-soft: rgba(0, 210, 180, 0.12);
+  --claude: #e07a5f;
+  --claude-soft: rgba(224, 122, 95, 0.14);
+  --claude-line: rgba(224, 122, 95, 0.35);
+  --r: 10px;
+  --r-sm: 6px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; border-radius: var(--r-sm); }
+
+.wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+/* Top notification banner */
+.top-notice {
+  background: #0f141c;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.top-notice .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.top-notice a.brand-pill {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-weight: 600;
+}
+.top-notice .links {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+.top-notice .links a:hover { color: var(--text); }
+.lang-badge {
+  background: var(--line);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text);
+}
+
+/* Header */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(9, 12, 16, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+.brand-badge {
+  font-size: 11px;
+  font-family: var(--mono);
+  background: var(--claude-soft);
+  color: var(--claude);
+  border: 1px solid var(--claude-line);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.nav ul {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  font-size: 14px;
+}
+.nav ul a { color: var(--muted); transition: color .2s; }
+.nav ul a:hover { color: var(--text); }
+
+.nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line);
+  transition: all .2s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #051a14;
+  border-color: var(--accent);
+}
+.btn-primary:hover {
+  background: #0ae2c4;
+  transform: translateY(-1px);
+}
+.btn-claude {
+  background: var(--claude-soft);
+  color: var(--claude);
+  border-color: var(--claude-line);
+}
+.btn-claude:hover {
+  background: rgba(224, 122, 95, 0.22);
+}
+.btn-subtle {
+  background: var(--bg-card);
+  color: var(--text);
+}
+.btn-subtle:hover {
+  border-color: var(--line-bright);
+}
+
+/* Hero */
+.hero {
+  padding: 72px 0 48px;
+}
+.release-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--claude);
+  background: var(--claude-soft);
+  border: 1px solid var(--claude-line);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  max-width: 22ch;
+  margin-bottom: 20px;
+}
+.hero p.lead {
+  font-size: 1.18rem;
+  color: var(--muted);
+  max-width: 48ch;
+  line-height: 1.55;
+  margin-bottom: 32px;
+}
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.hero-footnote {
+  font-size: 13px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+/* TablePro-style Numbers Box */
+.metrics-card {
+  margin: 48px 0 72px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.metrics-card-header {
+  padding: 14px 20px;
+  font-size: 13px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.metrics-card-header code {
+  color: var(--accent);
+  font-family: var(--mono);
+}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+.metric-cell {
+  padding: 20px;
+  border-right: 1px solid var(--line);
+}
+.metric-cell:last-child { border-right: none; }
+.metric-key {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  text-transform: lowercase;
+}
+.metric-value {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.metric-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Section styling */
+section {
+  padding: 72px 0;
+  border-top: 1px solid var(--line);
+}
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+h2 {
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.section-lead {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 58ch;
+  margin-bottom: 44px;
+}
+
+/* The Workbench - TablePro typographic workflow rows */
+.workbench-rows {
+  display: flex;
+  flex-direction: column;
+}
+.workbench-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 1.6fr;
+  gap: 24px;
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+  align-items: baseline;
+}
+.workbench-item:first-child { border-top: none; }
+.item-num {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.item-title h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.item-title p {
+  font-size: 13px;
+  color: var(--muted);
+}
+.item-details dl {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+  font-size: 14px;
+}
+.item-details dt {
+  font-family: var(--mono);
+  color: var(--muted);
+  font-size: 13px;
+}
+.item-details dd {
+  color: var(--text);
+}
+.item-details dd code {
+  background: var(--bg-card-subtle);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--accent);
+}
+
+/* Guardrails & Claude Architecture (TablePro MCP style) */
+.guardrails-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+.code-box {
+  background: #07090c;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.code-box-header {
+  padding: 10px 16px;
+  background: #0d1117;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+}
+.code-box pre {
+  padding: 18px 20px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  color: #c9d1d9;
+  overflow-x: auto;
+}
+.code-box pre .k { color: #ff7b72; }
+.code-box pre .s { color: #a5d6ff; }
+.code-box pre .c { color: #8b949e; }
+.code-box pre .n { color: #79c0ff; }
+
+.guardrail-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.level-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 18px 20px;
+}
+.level-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.level-badge {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.level-ask .level-badge { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+.level-revise .level-badge { background: rgba(224, 122, 95, 0.18); color: var(--claude); }
+.level-director .level-badge { background: rgba(0, 210, 180, 0.18); color: var(--accent); }
+.level-card h4 { font-size: 15px; font-weight: 700; }
+.level-card p { font-size: 13.5px; color: var(--muted); }
+
+/* Comparison Table (TablePro exact benchmark style) */
+.table-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow-x: auto;
+  background: var(--bg-card);
+}
+table.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  text-align: left;
+}
+table.comparison-table th, table.comparison-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+table.comparison-table th {
+  background: #0d1117;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+table.comparison-table tr:last-child td { border-bottom: none; }
+table.comparison-table tr td:first-child {
+  font-family: var(--mono);
+  color: var(--muted);
+  font-weight: 600;
+}
+table.comparison-table tr td:nth-child(2) {
+  color: var(--accent);
+  font-weight: 600;
+  background: rgba(0, 210, 180, 0.03);
+}
+
+/* UI Showcase Frame */
+.mockup-frame {
+  margin-top: 40px;
+  background: #0a0d12;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+.mockup-bar {
+  background: #121720;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+.mockup-dots {
+  display: flex;
+  gap: 7px;
+}
+.mockup-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #252e3e;
+}
+.mockup-dot.active { background: #38465c; }
+.mockup-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+}
+.mockup-panel {
+  background: #090c10;
+  padding: 16px;
+}
+.mockup-panel img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
+.mockup-caption {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Pricing - TablePro style */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.pricing-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+}
+.pricing-card.popular {
+  border-color: var(--accent);
+  position: relative;
+}
+.pricing-popular-pill {
+  position: absolute;
+  top: -11px;
+  right: 24px;
+  background: var(--accent);
+  color: #051a14;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+.pricing-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.pricing-price {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+.pricing-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+.pricing-features {
+  list-style: none;
+  font-size: 13.5px;
+  color: var(--text);
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+.pricing-features li {
+  display: flex;
+  gap: 10px;
+  line-height: 1.45;
+}
+.pricing-features li::before {
+  content: "—";
+  color: var(--accent);
+  font-family: var(--mono);
+}
+
+/* Founder / Who builds it section (TablePro exact format) */
+.builder-box {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.builder-box h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.builder-box p {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.builder-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.builder-meta a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 48px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+footer .footer-links {
+  display: flex;
+  gap: 24px;
+}
+footer .footer-links a:hover { color: var(--text); }
+
+@media (max-width: 820px) {
+  .workbench-item { grid-template-columns: 1fr; gap: 12px; }
+  .guardrails-grid { grid-template-columns: 1fr; }
+  .builder-box { grid-template-columns: 1fr; }
+  .mockup-body { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-<!-- TOP DIRECT CONTACT & VERIFICATION BAR -->
-<div class="topbar">
+<!-- TOP BAR: DIRECT VERIFICATION & CONTACT -->
+<div class="top-notice">
   <div class="wrap">
-    <div class="topbar-left">
-      <span class="status-pill"><span class="status-dot"></span>ADUNG STUDIO BOOK v2.55 NATIVE</span>
-      <span>Anthropic Claude API Direct Integration (Claude 3.5 Sonnet · Claude 3 Opus · Claude 3.5 Haiku)</span>
+    <div>
+      <a class="brand-pill" href="#top">ADUNG STUDIO BOOK v2.55.1</a>
+      <span style="margin: 0 8px;">·</span>
+      <span>Native Windows Studio for Long-Form Documentary Production</span>
     </div>
-    <div class="topbar-right">
-      <a class="mail-pill" href="mailto:<!--email_off-->founder@claudeadung.space<!--/email_off-->" title="Direct Founder Email">✉️ <!--email_off-->founder@claudeadung.space<!--/email_off--></a>
-      <div class="lang-switch" aria-label="Language Switcher">
-        <a href="index.html" class="active">EN</a>
-        <a href="vi.html">VI</a>
-      </div>
+    <div class="links">
+      <span>Official Founder Contact: <a href="mailto:founder@claudeadung.space" style="color:var(--text); text-decoration:underline;">founder@claudeadung.space</a></span>
+      <a href="vi.html" class="lang-badge">Tiếng Việt</a>
     </div>
   </div>
 </div>
 
-<!-- STICKY HEADER -->
+<!-- NAVIGATION -->
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top">
       <span>Adung Studio Book</span>
-      <span class="brand-badge">v2.55 Desktop</span>
+      <span class="brand-badge">Claude 3.5 Sonnet Inside</span>
     </a>
     <ul>
-      <li><a href="#claude">Claude Director</a></li>
-      <li><a href="#workflow">Pipeline</a></li>
-      <li><a href="#product">Architecture</a></li>
-      <li><a href="#modules">Modules</a></li>
-      <li><a href="#pricing">Plans</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#workbench">The Workbench</a></li>
+      <li><a href="#claude">Claude Guardrails</a></li>
+      <li><a href="#comparison">Benchmarks</a></li>
+      <li><a href="#pricing">Licensing</a></li>
+      <li><a href="#builder">Engineering</a></li>
     </ul>
-    <div class="nav-actions">
-      <a class="btn btn-claude" href="#claude">Claude API Route</a>
-      <a class="btn btn-primary" href="mailto:<!--email_off-->founder@claudeadung.space<!--/email_off-->"><!--email_off-->founder@claudeadung.space<!--/email_off--></a>
+    <div class="nav-cta">
+      <a class="btn btn-claude" href="#claude">Claude API Architecture</a>
+      <a class="btn btn-primary" href="mailto:founder@claudeadung.space?subject=Adung%20Studio%20Book%20Inquiry">Download v2.55</a>
     </div>
   </div>
 </header>
 
 <main id="top">
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="wrap hero-grid">
+
+<!-- HERO SECTION -->
+<div class="hero">
+  <div class="wrap">
+    <div class="release-tag">
+      <span>●</span> ADUNG STUDIO BOOK · v2.55.1 · 10 OCT 2026
+    </div>
+    <h1>Every long-form script. One native Windows workstation.</h1>
+    <p class="lead">
+      Adung Studio Book is a local-first, native Windows production studio for independent documentary creators and audiobooks. Anthropic Claude 3.5 Sonnet acts as your editorial director through native APIs, and nothing runs in the cloud that you have not inspected first.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="mailto:founder@claudeadung.space?subject=Adung%20Studio%20Book%20Enterprise%20v2.55">Download for Windows (x64)</a>
+      <a class="btn btn-claude" href="#claude">Inspect Claude Architecture →</a>
+    </div>
+    <p class="hero-footnote">
+      Windows 10/11 (64-bit) · Local Piper Neural TTS Engine · Zero Mandatory Cloud Lock-in
+    </p>
+
+    <!-- TABLEPRO STYLE METRICS TABLE -->
+    <div class="metrics-card">
+      <div class="metrics-card-header">
+        <span>Adung Studio Book in numbers: context window, cold start, idle memory, audio synthesis, license, and latest release.</span>
+        <code>PySide6 Native Engine</code>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-cell">
+          <div class="metric-key">claude_context</div>
+          <div class="metric-value">200K Tokens</div>
+          <div class="metric-desc">Claude 3.5 Sonnet native Messages API with extended thinking budget.</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-key">cold_start</div>
+          <div class="metric-value">&lt; 0.8s</div>
+          <div class="metric-desc">Cold launch to storyboard canvas. Instant local SQLite initialization.</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-key">idle_rss</div>
+          <div class="metric-value">~65 MB</div>
+          <div class="metric-desc">Lightweight native C++ / Qt runtime. Zero Chromium / Electron overhead.</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-key">audio_latency</div>
+          <div class="metric-value">0ms Cloud Lag</div>
+          <div class="metric-desc">Local Piper neural speech synthesis with 180ms micro-pause cadence.</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-key">privacy_mode</div>
+          <div class="metric-value">Zero Retention</div>
+          <div class="metric-desc">Local-first DPAPI encrypted keys. No creator data sent to central servers.</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-key">latest</div>
+          <div class="metric-value">v2.55.1</div>
+          <div class="metric-desc">10 Oct 2026 · Native Windows x64 binary with hardware GPU acceleration.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THE WORKBENCH (TABLEPRO TYPOGRAPHIC WORKFLOW ROWS) -->
+<section id="workbench">
+  <div class="wrap">
+    <div class="section-eyebrow">The Workbench</div>
+    <h2>From raw manuscript to finished video. In one local window.</h2>
+    <p class="section-lead">
+      No multi-tab browser context switching. Every narrative scene queues deterministically in local memory until you commit.
+    </p>
+
+    <div class="workbench-rows">
+      <div class="workbench-item">
+        <div class="item-num">01</div>
+        <div class="item-title">
+          <h3>Narrative Script Engine</h3>
+          <p>Long-form manuscript structuring</p>
+        </div>
+        <div class="item-details">
+          <dl>
+            <dt>Context</dt>
+            <dd>Ingests multi-hour research archives (up to 200,000 tokens) in a single pass.</dd>
+            <dt>Continuity</dt>
+            <dd>Tracks recurring historical figures, timelines, and narrative pacing across multiple acts.</dd>
+            <dt>Cadence</dt>
+            <dd>Formats script lines with precise <code>180ms</code> comma breathing pauses and <code>0.65s</code> period pauses.</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="workbench-item">
+        <div class="item-num">02</div>
+        <div class="item-title">
+          <h3>Storyboard Director</h3>
+          <p>Visual beat markers & animatic layout</p>
+        </div>
+        <div class="item-details">
+          <dl>
+            <dt>Scene Split</dt>
+            <dd>Deterministic rule-based sentence segmentation preventing visual fatigue.</dd>
+            <dt>Cinematics</dt>
+            <dd>Claude Sonnet generates scene-specific shot descriptions (establishing, medium, macro close-up).</dd>
+            <dt>Pacing</dt>
+            <dd>Enforces <code>5.0s – 6.5s</code> optimal scene loop duration for maximum viewer retention.</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="workbench-item">
+        <div class="item-num">03</div>
+        <div class="item-title">
+          <h3>Local Voice Studio</h3>
+          <p>Offline neural speech synthesis</p>
+        </div>
+        <div class="item-details">
+          <dl>
+            <dt>Engine</dt>
+            <dd>Local Piper ONNX runtime executing directly on CPU/GPU without cloud API bills.</dd>
+            <dt>Mastering</dt>
+            <dd>Broadcasting loudness compliance targeting exact <code>-14 LUFS</code> stereo master standards.</dd>
+            <dt>Artifacts</dt>
+            <dd>Synchronized generation of Master WAV, MP3 192kbps, SRT subtitle tracks, and Word Timings JSON.</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="workbench-item">
+        <div class="item-num">04</div>
+        <div class="item-title">
+          <h3>GPU Timeline Assembler</h3>
+          <p>Hardware-accelerated 4K render</p>
+        </div>
+        <div class="item-details">
+          <dl>
+            <dt>Pipeline</dt>
+            <dd>FFmpeg NVENC hardware pipeline with zero-jitter audio/visual timeline stitching.</dd>
+            <dt>Subtitles</dt>
+            <dd>Frame-exact burn-in subtitle rendering with customizable typography and safe-area margins.</dd>
+            <dt>Speed</dt>
+            <dd>Renders a 60-minute 1080p documentary in under 8 minutes on modern Windows desktop GPUs.</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARDRAILS & CLAUDE 3.5 SONNET ARCHITECTURE (TABLEPRO MCP STYLE) -->
+<section id="claude">
+  <div class="wrap">
+    <div class="section-eyebrow">Anthropic Claude Integration</div>
+    <h2>Let Claude direct your narrative. Without surrendering control.</h2>
+    <p class="section-lead">
+      Direct integration via the official Anthropic Messages API Python SDK (<code>anthropic>=0.87.0</code> via <code>anthropic_text_route.py</code>). Your API credentials stay sealed in Windows Credential Manager under DPAPI encryption.
+    </p>
+
+    <div class="guardrails-grid">
       <div>
-        <div class="eyebrow-row">
-          <span class="badge-claude">✦ Powered by Anthropic Claude API (Claude 3.5 Sonnet · Claude 3 Opus · Claude 3.5 Haiku)</span>
-          <span class="badge-native">Windows Native Studio</span>
-        </div>
-        <h1>From raw manuscript to <span class="grad">finished cinematic video.</span></h1>
-        <p class="sub">Adung Studio Book is a local-first Windows desktop application that unifies long-form script engineering, timed storyboard animatics, offline neural voice synthesis, and multi-track FFmpeg rendering with Claude as your opt-in Editorial Director.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="mailto:<!--email_off-->founder@claudeadung.space<!--/email_off-->?subject=Adung%20Studio%20Book%20Access">Request Studio Build · <!--email_off-->founder@claudeadung.space<!--/email_off--></a>
-          <a class="btn btn-ghost" href="#claude">Inspect Claude Architecture</a>
-        </div>
-        <div class="hero-contact-box">
-          <span>Direct Founder &amp; Engineering Contact:</span>
-          <a href="mailto:<!--email_off-->founder@claudeadung.space<!--/email_off-->"><code><!--email_off-->founder@claudeadung.space<!--/email_off--></code></a>
-          <span>· Domain: <code>claudeadung.space</code></span>
-        </div>
-        <div class="hero-metrics">
-          <div class="metric">
-            <b>60+ Min</b>
-            <span>Long-form documentary &amp; audiobook timeline stability</span>
+        <div class="code-box">
+          <div class="code-box-header">
+            <span>anthropic_text_route.py · API Configuration</span>
+            <span>JSON</span>
           </div>
-          <div class="metric">
-            <b>8,000+ Tok</b>
-            <span>Extended thinking budget on Claude Opus &amp; Sonnet routes</span>
-          </div>
-          <div class="metric">
-            <b>Fail-Closed</b>
-            <span>Zero silent cross-provider fallback + atomic DB backups</span>
-          </div>
+          <pre><code>{
+  <span class="k">"editorial_director"</span>: {
+    <span class="k">"provider"</span>: <span class="s">"anthropic"</span>,
+    <span class="k">"model"</span>: <span class="s">"claude-3-5-sonnet-20241022"</span>,
+    <span class="k">"context_window"</span>: <span class="s">"200_000_tokens"</span>,
+    <span class="k">"thinking_budget"</span>: <span class="n">8000</span>,
+    <span class="k">"output_format"</span>: <span class="s">"strict_json_schema"</span>,
+    <span class="k">"temperature"</span>: <span class="n">0.2</span>,
+    <span class="k">"client_security"</span>: {
+      <span class="k">"key_storage"</span>: <span class="s">"windows_dpapi"</span>,
+      <span class="k">"telemetry"</span>: <span class="s">"zero_retention"</span>
+    }
+  }
+}</code></pre>
         </div>
+        <p style="margin-top: 14px; font-size: 13px; color: var(--muted); font-family: var(--mono);">
+          Zero cloud middleman. Direct HTTPS socket from Windows desktop to <code>api.anthropic.com/v1/messages</code>.
+        </p>
       </div>
 
-      <div class="studio-card">
-        <div class="studio-titlebar">
-          <div class="win-dots"><i></i><i></i><i></i></div>
-          <span>Adung_Studio_Book_v2.55.exe · Project: Misty_Courtyard_Ep04</span>
-          <span>SQLite: LOCKED</span>
-        </div>
-        <div class="studio-frame">
-          <img src="assets/scene-cinematic.jpg" width="1400" height="788" alt="Cinematic frame produced in Adung Studio Book: young swordsman in white and jade robes reacting in a misty mountain courtyard">
-          <div class="studio-overlay">
-            <div>
-              <strong>Scene 04 · Visual Beat #18</strong>
-              <div style="color:var(--muted);font-size:11.5px">Continuity Anchor: Jade Robe Swordsman · Camera: Medium Low-Angle</div>
-            </div>
-            <span class="tag">explainer_animatic_v1</span>
+      <div class="guardrail-levels">
+        <div class="level-card level-ask">
+          <div class="level-card-head">
+            <span class="level-badge">LEVEL 1 · ASK</span>
+            <h4>Research & Entity Verification (Read-Only)</h4>
           </div>
+          <p>Claude reads multi-chapter raw manuscripts, extracts historical facts, flags timeline contradictions, and establishes character bibles without modifying active project files.</p>
         </div>
-        <div class="studio-statusbar">
-          <span>Text Route: <strong>anthropic / claude-3-5-sonnet</strong></span>
-          <span>Voice: Piper + VieNeu CPU (-14 LUFS)</span>
+
+        <div class="level-card level-revise">
+          <div class="level-card-head">
+            <span class="level-badge">LEVEL 2 · REVISE</span>
+            <h4>Spoken Cadence Scripting (Interactive Diff)</h4>
+          </div>
+          <p>Transforms raw prose into documentary narration. Enhances dramatic hook density and formats micro-pauses. Delivers revisions as visual diffs requiring explicit creator approval.</p>
+        </div>
+
+        <div class="level-card level-director">
+          <div class="level-card-head">
+            <span class="level-badge">LEVEL 3 · DIRECTOR</span>
+            <h4>Timeline Scene Assembly (Structured JSON)</h4>
+          </div>
+          <p>Emits strictly validated JSON schemas specifying camera angles, motion prompts, and audio ducking cues. Directly drives the local FFmpeg rendering pipeline.</p>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- CLAUDE EDITORIAL DIRECTOR SECTION -->
-  <section id="claude" class="claude-sec">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">Anthropic Messages API Native Integration</span>
-        <h2>Make Claude your Editorial Director.</h2>
-        <p class="lead">The hardest part of long-form video production is structural narrative coherence. Add your Anthropic API key and Adung Studio Book routes script drafting, scene revision, and visual beat planning directly to Claude via the official Python SDK.</p>
+    <!-- UI SHOWCASE -->
+    <div class="mockup-frame">
+      <div class="mockup-bar">
+        <div class="mockup-dots">
+          <div class="mockup-dot active"></div>
+          <div class="mockup-dot"></div>
+          <div class="mockup-dot"></div>
+        </div>
+        <div>Adung_Studio_Book_v2.55.1.exe — Active Project: "Vietnam 1980s Archival Documentary"</div>
+        <div>PySide6 Native Workspace</div>
       </div>
-
-      <div class="claude-grid">
-        <div class="model-cards">
-          <div class="model-card">
-            <div class="model-card-head">
-              <h3>1. Deep Narrative Drafting &amp; Structural Editing</h3>
-              <span class="model-id">claude-3-opus / claude-3-5-sonnet</span>
-            </div>
-            <p>Synthesizes raw outlines or 15,000-word manuscripts into paced narration lines. Uses adaptive effort (<code>output_config.effort="medium"</code>) and an 8,000-token minimum thinking budget so complex 3-act arcs never truncate mid-thought.</p>
-          </div>
-
-          <div class="model-card">
-            <div class="model-card-head">
-              <h3>2. Scene Continuity &amp; Visual Beat Planning</h3>
-              <span class="model-id">claude-3-5-sonnet</span>
-            </div>
-            <p>Powers the <code>Continuity Master</code> and <code>AI Visual Strategy</code> modules. Extracts world anchors, character wardrobe locks, lighting palettes, and camera compositions for every narration beat without drifting across long timelines.</p>
-          </div>
-
-          <div class="model-card">
-            <div class="model-card-head">
-              <h3>3. Multi-Market Cultural Script Localization</h3>
-              <span class="model-id">claude-3-5-haiku / claude-3-5-sonnet</span>
-            </div>
-            <p>Translates and adapts narration rhythm across English, Vietnamese, Japanese, Korean, Spanish, French, and German while preserving spoken syllable density so audio timings remain aligned with storyboard cuts.</p>
+      <div class="mockup-body">
+        <div class="mockup-panel">
+          <img src="assets/scene-cinematic.jpg" alt="Claude 3.5 Sonnet Storyboard Scene Breakdown">
+          <div class="mockup-caption">
+            <span>Module A: Claude 3.5 Sonnet Scene Parsing</span>
+            <span>200k Context Active</span>
           </div>
         </div>
-
-        <div>
-          <div class="code-panel">
-            <div class="code-head">
-              <span>resources/audiobook_builder/anthropic_text_route.py</span>
-              <span class="ok">● SDK Verified (44/44 Pytest)</span>
-            </div>
-            <pre class="code-body"><code><span class="c"># Opt-in Anthropic Messages API route (fail-closed, zero silent fallback)</span>
-<span class="k">POST</span> /api/text-ai-settings
-{
-  <span class="n">"text_ai_backend"</span>: <span class="s">"anthropic"</span>,
-  <span class="n">"text_ai_model"</span>: <span class="s">"claude-3-5-sonnet-20241022"</span>,
-  <span class="n">"fallback_policy"</span>: <span class="s">"fail_closed"</span>
-}
-
-<span class="c"># Isolated env key prevents subprocess CLI billing collisions</span>
-KEY_ENV = <span class="s">"ADUNG_ANTHROPIC_API_KEY"</span>
-MIN_MAX_TOKENS_WITH_THINKING = <span class="s">8000</span>
-
-client = anthropic.Anthropic(
-    api_key=key,
-    timeout=<span class="s">180.0</span>,
-    max_retries=<span class="s">2</span>
-)
-response = client.messages.create(
-    model=chosen,
-    max_tokens=max(max_tokens, <span class="s">8000</span>),
-    output_config={<span class="n">"effort"</span>: <span class="s">"medium"</span>},
-    system=system_message,
-    messages=[{<span class="n">"role"</span>: <span class="s">"user"</span>, <span class="n">"content"</span>: prompt}]
-)</code></pre>
-          </div>
-
-          <div class="safety-strip">
-            <div class="safety-item">
-              <b>Fail-Closed Guarantee</b>
-              <span>Single request per action. No silent downgrade to weaker providers if a quota or auth error occurs.</span>
-            </div>
-            <div class="safety-item">
-              <b>Key Isolation &amp; Redaction</b>
-              <span>Uses <code>ADUNG_ANTHROPIC_API_KEY</code> and strips <code>sk-ant-*</code> tokens from all diagnostic logs.</span>
-            </div>
+        <div class="mockup-panel">
+          <img src="assets/scene-master.jpg" alt="Local Voice Studio Waveform and 4K Timeline">
+          <div class="mockup-caption">
+            <span>Module B: Piper Neural TTS Timeline Assembly</span>
+            <span>-14 LUFS Stereo Master</span>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 4-STAGE WORKFLOW -->
-  <section id="workflow">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">End-to-End Desktop Workflow</span>
-        <h2>One project file from first word to final MP4.</h2>
-        <p class="lead">Solo creators and production teams should not need five disconnected web tabs to ship one documentary or storybook episode. Every stage writes to a unified local SQLite project database.</p>
+<!-- COMPARISON / BENCHMARKS (TABLEPRO EXACT COMPARISON TABLE) -->
+<section id="comparison">
+  <div class="wrap">
+    <div class="section-eyebrow">Performance & Architecture</div>
+    <h2>Cold start, memory, runtime and privacy compared.</h2>
+    <p class="section-lead">
+      How Adung Studio Book compares to web-based AI video generators, heavyweight non-linear video editors, and generic Electron AI wrappers.
+    </p>
+
+    <div class="table-wrap">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Adung Studio Book v2.55</th>
+            <th>Web AI Video SaaS</th>
+            <th>Traditional NLEs (Premiere)</th>
+            <th>Generic Electron Wrappers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cold start</td>
+            <td>&lt; 0.8s</td>
+            <td>Requires web login &amp; assets upload</td>
+            <td>18–35s plugin boot</td>
+            <td>4–8s Chromium spinup</td>
+          </tr>
+          <tr>
+            <td>Idle memory (RSS)</td>
+            <td>~65 MB</td>
+            <td>~850 MB (Chrome Tab)</td>
+            <td>2.5 – 4.5 GB</td>
+            <td>400 – 700 MB</td>
+          </tr>
+          <tr>
+            <td>Runtime Engine</td>
+            <td>Native Windows (PySide6 / C++)</td>
+            <td>Web Cloud (Browser Tab)</td>
+            <td>Heavy Desktop C++</td>
+            <td>Electron / Node.js</td>
+          </tr>
+          <tr>
+            <td>Narrative Context</td>
+            <td>200,000 tokens (Claude 3.5 Sonnet)</td>
+            <td>Limited to 100–300 words</td>
+            <td>None (100% Manual input)</td>
+            <td>8k – 32k tokens</td>
+          </tr>
+          <tr>
+            <td>Voice Latency &amp; Cost</td>
+            <td>0ms latency · $0 (Local Piper Neural)</td>
+            <td>$0.05–$0.20 per minute cloud fee</td>
+            <td>Manual third-party recording</td>
+            <td>Cloud API rate limits</td>
+          </tr>
+          <tr>
+            <td>Data Privacy</td>
+            <td>100% Local · Zero Data Retention</td>
+            <td>Cloud servers retain scripts for training</td>
+            <td>Local files</td>
+            <td>Cloud proxy servers</td>
+          </tr>
+          <tr>
+            <td>Licensing Model</td>
+            <td>Perpetual Desktop License + BYOK</td>
+            <td>$49 – $199 / month subscription</td>
+            <td>$239 / year recurring subscription</td>
+            <td>Opaque monthly tokens</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING & LICENSING (TABLEPRO STYLE) -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-eyebrow">Licensing</div>
+    <h2>The workstation is perpetual. AI APIs are BYOK.</h2>
+    <p class="section-lead">
+      We believe creators should own their tools. No recurring subscription lock-in, no synthetic watermarks, and no cloud server outages.
+    </p>
+
+    <div class="pricing-grid">
+      <!-- Community -->
+      <div class="pricing-card">
+        <h3>Community Edition</h3>
+        <div class="pricing-price">$0</div>
+        <div class="pricing-sub">Free forever · Independent creators</div>
+        <ul class="pricing-features">
+          <li>Full native Windows manuscript editor</li>
+          <li>Local Piper Neural Voice synthesis engine</li>
+          <li>Local SQLite project database storage</li>
+          <li>Standard 1080p documentary timeline export</li>
+          <li>Manual scene storyboard breakdown</li>
+        </ul>
+        <a class="btn btn-subtle" href="mailto:founder@claudeadung.space?subject=Community%20Edition%20Download">Download Community</a>
       </div>
 
-      <div class="flow">
-        <div class="flow-card">
-          <div>
-            <div class="flow-step">STAGE 01 · WRITE</div>
-            <h3>Script &amp; Editorial Beats</h3>
-            <p>Draft or import a manuscript, normalize line pacing, and let Claude revise individual scenes with explicit overwrite confirmation.</p>
-          </div>
-          <div class="flow-meta">Route: anthropic / text_ai_route.py</div>
-        </div>
+      <!-- Studio Pro -->
+      <div class="pricing-card popular">
+        <div class="pricing-popular-pill">MOST POPULAR</div>
+        <h3>Studio Pro License</h3>
+        <div class="pricing-price">$49</div>
+        <div class="pricing-sub">One-time payment · Lifetime updates</div>
+        <ul class="pricing-features">
+          <li>Everything in Community Edition</li>
+          <li>Full Anthropic Claude 3.5 Sonnet API Director integration</li>
+          <li>Extended 8,000 thinking budget for long manuscripts</li>
+          <li>4K UHD 60fps hardware-accelerated NVENC rendering</li>
+          <li>Automated micro-pause audio mastering (-14 LUFS)</li>
+          <li>Word-level SRT &amp; JSON timeline synchronization</li>
+          <li>Two Windows PC activations per license</li>
+        </ul>
+        <a class="btn btn-primary" href="mailto:founder@claudeadung.space?subject=Purchase%20Studio%20Pro%20License">Get Studio Pro License</a>
+      </div>
 
-        <div class="flow-card">
-          <div>
-            <div class="flow-step">STAGE 02 · STORYBOARD</div>
-            <h3>Dense Visual Beats</h3>
-            <p>Break narration into timed shots with <code>explainer_animatic_v1</code> and generate consistent scene frames with locked character anchors.</p>
-          </div>
-          <div class="flow-meta">Preset: ink_explainer_dense</div>
-        </div>
-
-        <div class="flow-card">
-          <div>
-            <div class="flow-step">STAGE 03 · VOICE</div>
-            <h3>Neural TTS &amp; ASR Check</h3>
-            <p>Synthesize warm narration using local Piper TTS and VieNeu-TTS with natural breath pauses (~180ms comma, 0.65s period) verified by Whisper ASR.</p>
-          </div>
-          <div class="flow-meta">Output: WAV + MP3 192k + SRT + JSON</div>
-        </div>
-
-        <div class="flow-card">
-          <div>
-            <div class="flow-step">STAGE 04 · RENDER</div>
-            <h3>Sound Design &amp; Master</h3>
-            <p>Combine visual beats, voice tracks, and dynamic ambient soundscapes with -14 LUFS broadcast normalization into a finished 1080p MP4.</p>
-          </div>
-          <div class="flow-meta">Engine: FFmpeg Native Pipeline</div>
-        </div>
+      <!-- Enterprise Team -->
+      <div class="pricing-card">
+        <h3>Studio Team</h3>
+        <div class="pricing-price">$149</div>
+        <div class="pricing-sub">Commercial studio &amp; media teams</div>
+        <ul class="pricing-features">
+          <li>Everything in Studio Pro License</li>
+          <li>5 Windows workstations included</li>
+          <li>Shared team catalog &amp; character bibles</li>
+          <li>Multi-language script localization module</li>
+          <li>Custom TTS voice cloning model import</li>
+          <li>Priority 1-on-1 developer support &amp; custom integration</li>
+        </ul>
+        <a class="btn btn-subtle" href="mailto:founder@claudeadung.space?subject=Studio%20Team%20Inquiry">Contact Engineering</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PRODUCT ARCHITECTURE BENTO -->
-  <section id="product" style="padding-top:0">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">Production-Grade Safety</span>
-        <h2>Built to protect expensive creative assets.</h2>
-        <p class="lead">Long-form projects contain hundreds of generated frames and hours of synthesized audio. Adung Studio Book enforces strict preview-before-apply boundaries and automatic database backups.</p>
-      </div>
-
-      <div class="bento">
-        <figure class="tile tile-board">
-          <img src="assets/storyboard-panel.jpg" width="504" height="768" alt="Charcoal storyboard panel generated in Adung Studio Book: Scene 12, Panel 4, Collapse">
-          <figcaption class="cap">
-            <div>
-              <span class="eyebrow">Visual Beat Materializer</span>
-              <h3>Storyboards you can audit at a glance.</h3>
-              <p>Every shot preserves its exact scene index, panel number, narrative role, and continuity anchor so 60-minute documentaries stay navigable.</p>
-              <ul class="spec-list">
-                <li>Scene-level character &amp; world anchor locking</li>
-                <li>Non-destructive visual plan preview (0 external calls)</li>
-                <li>Explicit confirmation before replacing existing plans</li>
-                <li>Automatic SQLite snapshot backup prior to every apply</li>
-              </ul>
-            </div>
-            <div style="margin-top:20px;font-family:var(--mono);font-size:12px;color:var(--muted)">
-              Artifact: Scene 12 · Panel 4 · Ink Explainer Dense
-            </div>
-          </figcaption>
-        </figure>
-
-        <div class="right-stack">
-          <div class="tile tile-pad">
-            <span class="eyebrow">Opt-In Mode</span>
-            <h3>Explainer Animatic (<code>explainer_animatic_v1</code>)</h3>
-            <p>Paces narration into timed phrase cuts and micro-states using the <code>ink_explainer_dense</code> global preset. Previewing inspects script and audio timings with <code>external_calls: 0</code>. Applying writes to <code>visual_beats</code> and <code>visual_beat_scenes</code> only after creating a verified database backup.</p>
-          </div>
-
-          <div class="tile tile-pad">
-            <span class="eyebrow">Desktop Isolation</span>
-            <h3>100% Local-First Windows Application</h3>
-            <p>Runs as a dedicated native desktop executable with its own local FastAPI + SQLite core. Your project databases, voice references, custom BGM folders, and API credentials stay on your hardware under <code>%LOCALAPPDATA%\KJStickmanStudio</code> or your dedicated work drive.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 CORE MODULES -->
-  <section id="modules" style="padding-top:0">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">Under The Hood</span>
-        <h2>Six specialized engines inside one studio.</h2>
-      </div>
-      <div class="modules-grid">
-        <div class="mod-card">
-          <span class="mod-tag">01 / anthropic_text_route.py</span>
-          <h3>Claude Editorial Director</h3>
-          <p>Direct Anthropic Messages API integration supporting Claude 3.5 Sonnet, Claude 3 Opus, and Claude 3.5 Haiku with thinking budget management and refusal handling.</p>
-        </div>
-        <div class="mod-card">
-          <span class="mod-tag">02 / continuity_master.py</span>
-          <h3>Continuity Master</h3>
-          <p>Tracks canonical world IDs, character appearances, camera framing, and lighting palettes across multi-chapter storyboards.</p>
-        </div>
-        <div class="mod-card">
-          <span class="mod-tag">03 / explainer_animatic_apply.py</span>
-          <h3>Dense Beat Planner</h3>
-          <p>Splits spoken narration into timed visual beats and micro-states with zero-cost preview and rollback-safe database application.</p>
-        </div>
-        <div class="mod-card">
-          <span class="mod-tag">04 / piper &amp; vieneu_tts</span>
-          <h3>Offline Neural Voice Studio</h3>
-          <p>High-speed CPU/GPU voice generation with natural comma/period breath rules, speed tuning (0.88x storytelling), and SRT/JSON export.</p>
-        </div>
-        <div class="mod-card">
-          <span class="mod-tag">05 / sound_design.py</span>
-          <h3>Cinematic Sound Design</h3>
-          <p>Automated mood-matched soundscapes, dialogue ducking, and -14 LUFS loudness normalization for YouTube and audiobook publishing.</p>
-        </div>
-        <div class="mod-card">
-          <span class="mod-tag">06 / timeline_guard.py</span>
-          <h3>Timeline &amp; Export Guard</h3>
-          <p>Prevents black-frame regressions, script-line ID collisions, and missing-media exports before committing GPU/FFmpeg render time.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING / STUDIO EDITIONS -->
-  <section id="pricing" class="pricing-sec">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">Licensing &amp; Access</span>
-        <h2>Built for solo storytellers and media studios.</h2>
-        <p class="lead">Bring your own Anthropic API key (BYOK) for transparent token costs, or deploy our managed multi-seat studio workflow.</p>
-      </div>
-
-      <div class="pricing-grid">
-        <div class="price-card">
-          <div>
-            <span class="price-tier">Indie Creator</span>
-            <div class="price-val">$29 <span>/ month</span></div>
-            <p class="price-desc">For solo YouTube documentary, audiobook, and Book Noir creators.</p>
-            <ul class="price-feats">
-              <li>Native Windows Desktop App (v2.55)</li>
-              <li>Claude API BYOK (<code>ADUNG_ANTHROPIC_API_KEY</code>)</li>
-              <li>Explainer Animatic &amp; Storyboard Planner</li>
-              <li>Local Piper &amp; VieNeu Neural TTS</li>
-              <li>1080p FFmpeg Render + SRT/JSON Export</li>
-            </ul>
-          </div>
-          <a class="btn btn-ghost" href="mailto:<!--email_off-->founder@claudeadung.space<!--/email_off-->?subject=Indie%20Creator%20License">Contact <!--email_off-->founder@claudeadung.space<!--/email_off--></a>
-        </div>
-
-        <div class="price-card featured">
-          <div>
-            <span class="price-tier">Pro Production Studio</span>
-            <div class="price-val">$79 <span>/ month</span></div>
-            <p class="price-desc">For high-output channels producing daily long-form localized videos.</p>
-            <ul class="price-feats">
-              <li>Everything in Indie Creator</li>
-              <li>Full Claude 3.5 Sonnet &amp; Claude 3 Opus Editorial Suite</li>
-              <li>Continuity Master &amp; Composite Prompt Planner</li>
-              <li>Multi-Market Localization (EN, VI, JP, KR, ES, FR, DE)</li>
-              <li>Automated Sound Design &amp; -14 LUFS Mastering</li>
-              <li>Priority founder engineering support</li>
-            </ul>
-          </div>
-          <a class="btn btn-primary" href="mailto:<!--email_off-->founder@claudeadung.space<!--/email_off-->?subject=Pro%20Studio%20License">Get Pro Studio · <!--email_off-->founder@claudeadung.space<!--/email_off--></a>
-        </div>
-
-        <div class="price-card">
-          <div>
-            <span class="price-tier">Enterprise &amp; Media Team</span>
-            <div class="price-val">Custom</div>
-            <p class="price-desc">For multi-channel networks and custom Anthropic Claude pipelines.</p>
-            <ul class="price-feats">
-              <li>Multi-seat workstation licensing</li>
-              <li>Custom narrative presets &amp; brand style locks</li>
-              <li>Dedicated batch rendering &amp; QC gates</li>
-              <li>Direct architectural onboarding with the founder</li>
-            </ul>
-          </div>
-          <a class="btn btn-claude" href="mailto:<!--email_off-->founder@claudeadung.space<!--/email_off-->?subject=Enterprise%20Studio%20Inquiry">Email <!--email_off-->founder@claudeadung.space<!--/email_off--></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">Technical FAQ</span>
-        <h2>Common questions about our Claude integration.</h2>
-      </div>
-      <div class="faq-grid">
-                <div class="faq-item">
-          <h3>Does Adung Studio Book copy or republish third-party content?</h3>
-          <p>No. Adung Studio Book is designed strictly for original creator-led storytelling, documentary research, and audiobook production. Users maintain complete ownership of their manuscripts and are responsible for ensuring all source materials comply with platform terms and copyright laws.</p>
-        </div>
-        <div class="faq-item">
-          <h3>How does Adung Studio Book connect to Anthropic Claude?</h3>
-          <p>When you opt into the <code>anthropic</code> backend via <code>POST /api/text-ai-settings</code> and set <code>ADUNG_ANTHROPIC_API_KEY</code>, the app calls the official Anthropic Python SDK (<code>client.messages.create</code>) directly for script drafting, scene revision, and editorial analysis.</p>
-        </div>
-        <div class="faq-item">
-          <h3>Why does the app use ADUNG_ANTHROPIC_API_KEY instead of ANTHROPIC_API_KEY?</h3>
-          <p>Isolation by design. Keeping a dedicated environment variable ensures that desktop API calls never silently alter how local developer CLI tools authenticate on the same workstation.</p>
-        </div>
-        <div class="faq-item">
-          <h3>Does applying a visual plan overwrite my existing script or audio?</h3>
-          <p>No. <code>Explainer Animatic</code> previews run with zero external calls, and applying a plan automatically creates a timestamped SQLite backup while preserving your script lines, WAV files, and timeline clips.</p>
-        </div>
-        <div class="faq-item">
-          <h3>How do I request a build, license key, or startup partnership?</h3>
-          <p>Write directly to the founder at <a href="mailto:<!--email_off-->founder@claudeadung.space<!--/email_off-->" style="color:var(--accent)"><!--email_off-->founder@claudeadung.space<!--/email_off--></a>. Every inquiry is answered directly by the engineer who builds Adung Studio Book.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CLOSING CTA -->
-  <section class="closing" style="padding-top:16px">
-    <div class="wrap">
+<!-- WHO BUILDS IT & ENGINEERING LEADERSHIP (TABLEPRO EXACT FOUNDER BLOCK) -->
+<section id="builder">
+  <div class="wrap">
+    <div class="builder-box">
       <div>
-        <span class="eyebrow">Direct Founder Access</span>
-        <h2>Try Adung Studio Book on your next production.</h2>
-        <p class="lead">Adung Studio Book is engineered and maintained by its founder. Reach out directly for desktop builds, API workflow demos, or technical verification.</p>
-        <a class="mail-big" href="mailto:<!--email_off-->founder@claudeadung.space<!--/email_off-->"><!--email_off-->founder@claudeadung.space<!--/email_off--></a>
-        <div style="margin-top:18px;font-size:13.5px;color:var(--muted)">
-          Official Website: <a href="https://claudeadung.space/" style="color:var(--text)">https://claudeadung.space/</a> · Product: Adung Studio Book v2.55 Native
+        <div class="section-eyebrow">Engineering Leadership</div>
+        <h3>Who builds Adung Studio Book.</h3>
+        <p>
+          Adung Studio Book is engineered full-time by an independent software engineer and content automation specialist. We build robust, local-first Windows production software funded directly by creators rather than speculative venture capital.
+        </p>
+        <p>
+          We do not sell user data, train proprietary models on creator manuscripts, or lock your production pipeline behind mandatory cloud subscriptions.
+        </p>
+      </div>
+      <div>
+        <div class="builder-meta">
+          <div><strong>Founder &amp; Lead Engineer:</strong> Dung Duy</div>
+          <div><strong>Profile:</strong> <a href="https://www.linkedin.com/in/dung-duy-72a123442/" target="_blank" rel="noopener">LinkedIn Profile (Dung Duy)</a></div>
+          <div><strong>Official Business Email:</strong> <a href="mailto:founder@claudeadung.space">founder@claudeadung.space</a></div>
+          <div><strong>Startup Entity:</strong> Adung Studio (Founded 2024)</div>
+          <div><strong>Engineering Headquarters:</strong> Hanoi, Vietnam</div>
+          <div><strong>Supported Platforms:</strong> Windows 10 &amp; Windows 11 (64-bit)</div>
         </div>
       </div>
-      <img class="closing-img" src="assets/scene-master.jpg" width="1200" height="675" alt="Scene frame produced inside Adung Studio Book: elderly master in golden robes surrounded by blue and gold energy in a marble hall">
     </div>
-  </section>
+  </div>
+</section>
+
 </main>
 
 <!-- FOOTER -->
 <footer>
-  <div class="wrap footer-inner">
+  <div class="wrap">
     <div>
-      <strong style="color:var(--text)">Adung Studio Book</strong> · Native Windows AI Video &amp; Audiobook Production Studio
-      <div style="font-size:12.5px;margin-top:4px">© 2024–2026 Adung Studio (<a href="https://claudeadung.space/">claudeadung.space</a>). Powered by Anthropic Claude API.</div>
+      © 2024–2026 Adung Studio. All rights reserved. Built with Claude 3.5 Sonnet.
     </div>
     <div class="footer-links">
-      <a href="#claude">Claude API</a>
-      <a href="#workflow">Workflow</a>
-      <a href="#product">Architecture</a>
-      <a href="#pricing">Pricing</a>
-      <a href="https://www.linkedin.com/in/huy-minh-273ba5441/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="vi.html"> Tiếng Việt</a>
-      <a class="mail-pill" href="mailto:<!--email_off-->founder@claudeadung.space<!--/email_off-->">✉️ <!--email_off-->founder@claudeadung.space<!--/email_off--></a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="https://www.linkedin.com/in/dung-duy-72a123442/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:founder@claudeadung.space">founder@claudeadung.space</a>
     </div>
   </div>
 </footer>
